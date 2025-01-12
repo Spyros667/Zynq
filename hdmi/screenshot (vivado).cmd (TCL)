@@ -1,0 +1,1 @@
+write_bd_layout -format svg -orientation portrait /dest/design_1.svg
