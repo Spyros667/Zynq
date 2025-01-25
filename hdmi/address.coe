@@ -1,0 +1,23 @@
+;;
+;; Register addresses
+;; ;
+
+memory_initialization_radix=16;
+memory_initialization_vector=
+
+00000020
+
+00000100
+00000100
+
+00000104
+
+00000124
+
+FFFFFFFF;
+
+;; check for TX FIFO empty
+;; assert GPO
+;; ;
+
+;; 
