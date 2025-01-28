@@ -1,0 +1,16 @@
+; 3 sets of registers ("devices"): 76h(72h) C4h(C0h) 7Eh(7Ah)
+;
+;
+;
+;
+;
+
+20 -> FF: clear all interrupts
+20 == 04: check for RECEIVE empty? (not full) an TRANSMIT empty
+
+76:C7 -> 00: enable TPI
+"
+
+"
+
+program input to raise interrupt; set input size (4 bits); expect 1? byte (
