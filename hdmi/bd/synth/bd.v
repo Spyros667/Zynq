@@ -2,7 +2,7 @@
 //Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2024.2.1 (lin64) Build 5266912 Sun Dec 15 09:03:31 MST 2024
-//Date        : Tue Jan 28 19:30:01 2025
+//Date        : Fri Jan 31 20:57:09 2025
 //Host        : Electryc running 64-bit Gentoo Linux
 //Command     : generate_target bd.bd
 //Design      : bd
@@ -114,27 +114,31 @@ module Switches_imp_4FIHWM
   output [0:0]SW2;
   output [0:0]SW3;
 
+  wire [3:0]NOT_gate_Res;
   wire [3:0]SW;
   wire [0:0]SW0;
   wire [0:0]SW1;
   wire [0:0]SW2;
   wire [0:0]SW3;
 
-  bd_xlslice_0_0 xlslice_0
-       (.Din(SW),
+  bd_util_vector_logic_0_0 NOT_gate
+       (.Op1(SW),
+        .Res(NOT_gate_Res));
+  bd_xlslice_3_0 xlslice_0
+       (.Din(NOT_gate_Res),
         .Dout(SW0));
-  bd_xlslice_1_0 xlslice_1
-       (.Din(SW),
+  bd_xlslice_2_0 xlslice_1
+       (.Din(NOT_gate_Res),
         .Dout(SW1));
-  bd_xlslice_2_0 xlslice_2
-       (.Din(SW),
+  bd_xlslice_1_0 xlslice_2
+       (.Din(NOT_gate_Res),
         .Dout(SW2));
-  bd_xlslice_3_0 xlslice_3
-       (.Din(SW),
+  bd_xlslice_0_0 xlslice_3
+       (.Din(NOT_gate_Res),
         .Dout(SW3));
 endmodule
 
-(* CORE_GENERATION_INFO = "bd,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=bd,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=17,numReposBlks=13,numNonXlnxBlks=0,numHierBlks=4,maxHierDepth=2,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=2,numPkgbdBlks=0,bdsource=USER,synth_mode=Hierarchical}" *) (* HW_HANDOFF = "bd.hwdef" *) 
+(* CORE_GENERATION_INFO = "bd,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=bd,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=18,numReposBlks=14,numNonXlnxBlks=0,numHierBlks=4,maxHierDepth=2,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=2,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=2,da_board_cnt=3,synth_mode=Hierarchical}" *) (* HW_HANDOFF = "bd.hwdef" *) 
 module bd
    (BP,
     DDR_addr,
@@ -164,15 +168,9 @@ module bd
     HDMI_INTn,
     HDMI_PCLK,
     HDMI_VSYNC,
-    I2C0_scl_i,
-    I2C0_scl_o,
-    I2C0_scl_t,
-    I2C0_sda_i,
-    I2C0_sda_o,
-    I2C0_sda_t,
     LEDS,
     SW);
-  output BP;
+  output [0:0]BP;
   (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR ADDR" *) (* X_INTERFACE_MODE = "Master" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DDR, AXI_ARBITRATION_SCHEME TDM, BURST_LENGTH 8, CAN_DEBUG false, CAS_LATENCY 11, CAS_WRITE_LATENCY 11, CS_ENABLED true, DATA_MASK_ENABLED true, DATA_WIDTH 8, MEMORY_TYPE COMPONENTS, MEM_ADDR_MAP ROW_COLUMN_BANK, SLOT Single, TIMEPERIOD_PS 1250" *) inout [14:0]DDR_addr;
   (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR BA" *) inout [2:0]DDR_ba;
   (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR CAS_N" *) inout DDR_cas_n;
@@ -200,15 +198,10 @@ module bd
   inout HDMI_INTn;
   output HDMI_PCLK;
   output HDMI_VSYNC;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:iic:1.0 I2C0 SCL_I" *) (* X_INTERFACE_MODE = "Master" *) input I2C0_scl_i;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:iic:1.0 I2C0 SCL_O" *) output I2C0_scl_o;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:iic:1.0 I2C0 SCL_T" *) output I2C0_scl_t;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:iic:1.0 I2C0 SDA_I" *) input I2C0_sda_i;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:iic:1.0 I2C0 SDA_O" *) output I2C0_sda_o;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:iic:1.0 I2C0 SDA_T" *) output I2C0_sda_t;
   output [2:0]LEDS;
   input [3:0]SW;
 
+  wire [0:0]BP;
   wire [0:0]Blue_1;
   wire [14:0]DDR_addr;
   wire [2:0]DDR_ba;
@@ -236,14 +229,9 @@ module bd
   wire [15:0]HDMI_DATA;
   wire HDMI_DE;
   wire HDMI_HSYNC;
+  wire HDMI_INTn;
   wire HDMI_PCLK;
   wire HDMI_VSYNC;
-  wire I2C0_scl_i;
-  wire I2C0_scl_o;
-  wire I2C0_scl_t;
-  wire I2C0_sda_i;
-  wire I2C0_sda_o;
-  wire I2C0_sda_t;
   wire [2:0]LEDS;
   wire Pixel_clock_clk_out1;
   wire [0:0]Red_1;
@@ -270,9 +258,11 @@ module bd
        (.SW(SW),
         .SW0(Red_1),
         .SW1(Green_1),
-        .SW2(Blue_1));
+        .SW2(Blue_1),
+        .SW3(BP));
   bd_hdmi_out_0_0 hdmi_out_0
-       (.in_clk(Pixel_clock_clk_out1),
+       (.hdmi_intn(HDMI_INTn),
+        .in_clk(Pixel_clock_clk_out1),
         .lcd_data(HDMI_DATA),
         .lcd_de(HDMI_DE),
         .lcd_hsync(HDMI_HSYNC),
@@ -305,12 +295,7 @@ module bd
         .DDR_WEB(DDR_we_n),
         .FCLK_CLK0(processing_system7_0_FCLK_CLK0),
         .FCLK_RESET0_N(processing_system7_0_FCLK_RESET0_N),
-        .I2C0_SCL_I(I2C0_scl_i),
-        .I2C0_SCL_O(I2C0_scl_o),
-        .I2C0_SCL_T(I2C0_scl_t),
-        .I2C0_SDA_I(I2C0_sda_i),
-        .I2C0_SDA_O(I2C0_sda_o),
-        .I2C0_SDA_T(I2C0_sda_t),
+        .IRQ_F2P(1'b0),
         .MIO(FIXED_IO_mio),
         .PS_CLK(FIXED_IO_ps_clk),
         .PS_PORB(FIXED_IO_ps_porb),

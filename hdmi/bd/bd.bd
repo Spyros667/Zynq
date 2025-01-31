@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0x490562FEF2E940FB",
+      "boundary_crc": "0x4233AFF89EBF712F",
       "device": "xc7z020clg400-1",
       "name": "bd",
       "pfm_name": "xilinx:mys-7z020:name:0.0",
@@ -27,44 +27,14 @@
       "proc_sys_reset_0": "",
       "processing_system7_0": "",
       "Switches": {
-        "xlslice_0": "",
-        "xlslice_1": "",
+        "xlslice_3": "",
         "xlslice_2": "",
-        "xlslice_3": ""
+        "xlslice_1": "",
+        "xlslice_0": "",
+        "NOT_gate": ""
       }
     },
     "interface_ports": {
-      "I2C0": {
-        "mode": "Master",
-        "vlnv_bus_definition": "xilinx.com:interface:iic:1.0",
-        "vlnv": "xilinx.com:interface:iic_rtl:1.0",
-        "port_maps": {
-          "SDA_I": {
-            "physical_name": "I2C0_sda_i",
-            "direction": "I"
-          },
-          "SDA_O": {
-            "physical_name": "I2C0_sda_o",
-            "direction": "O"
-          },
-          "SDA_T": {
-            "physical_name": "I2C0_sda_t",
-            "direction": "O"
-          },
-          "SCL_I": {
-            "physical_name": "I2C0_scl_i",
-            "direction": "I"
-          },
-          "SCL_O": {
-            "physical_name": "I2C0_scl_o",
-            "direction": "O"
-          },
-          "SCL_T": {
-            "physical_name": "I2C0_scl_t",
-            "direction": "O"
-          }
-        }
-      },
       "DDR": {
         "mode": "Master",
         "vlnv_bus_definition": "xilinx.com:interface:ddrx:1.0",
@@ -232,6 +202,11 @@
             "direction": "IO"
           }
         }
+      },
+      "I2C0": {
+        "mode": "Master",
+        "vlnv_bus_definition": "xilinx.com:interface:iic:1.0",
+        "vlnv": "xilinx.com:interface:iic_rtl:1.0"
       }
     },
     "ports": {
@@ -258,7 +233,17 @@
       "SW": {
         "direction": "I",
         "left": "3",
-        "right": "0"
+        "right": "0",
+        "parameters": {
+          "PortType": {
+            "value": "undef",
+            "value_src": "ip_prop"
+          },
+          "PortType.PROP_SRC": {
+            "value": "false",
+            "value_src": "ip_prop"
+          }
+        }
       },
       "LEDS": {
         "direction": "O",
@@ -276,7 +261,9 @@
         }
       },
       "BP": {
-        "direction": "O"
+        "direction": "O",
+        "left": "0",
+        "right": "0"
       }
     },
     "components": {
@@ -288,22 +275,22 @@
         "inst_hier_path": "Pixel_clock",
         "parameters": {
           "CLKOUT1_JITTER": {
-            "value": "198.402"
+            "value": "219.225"
           },
           "CLKOUT1_PHASE_ERROR": {
-            "value": "225.812"
+            "value": "300.991"
           },
           "CLKOUT1_REQUESTED_OUT_FREQ": {
-            "value": "132.710400"
+            "value": "115.2"
           },
           "MMCM_CLKFBOUT_MULT_F": {
-            "value": "26.375"
+            "value": "54.000"
           },
           "MMCM_CLKOUT0_DIVIDE_F": {
-            "value": "6.625"
+            "value": "9.375"
           },
           "MMCM_DIVCLK_DIVIDE": {
-            "value": "3"
+            "value": "5"
           },
           "RESET_PORT": {
             "value": "resetn"
@@ -692,7 +679,7 @@
             "direction": "I",
             "parameters": {
               "FREQ_HZ": {
-                "value": "132704402",
+                "value": "115200000",
                 "value_src": "ip_prop"
               },
               "PHASE": {
@@ -863,7 +850,10 @@
             "value": "1"
           },
           "PCW_EN_EMIO_I2C0": {
-            "value": "1"
+            "value": "0"
+          },
+          "PCW_EN_EMIO_I2C1": {
+            "value": "0"
           },
           "PCW_EN_EMIO_TTC0": {
             "value": "0"
@@ -878,7 +868,7 @@
             "value": "1"
           },
           "PCW_EN_I2C0": {
-            "value": "1"
+            "value": "0"
           },
           "PCW_EN_I2C1": {
             "value": "1"
@@ -955,11 +945,8 @@
           "PCW_GPIO_PERIPHERAL_ENABLE": {
             "value": "1"
           },
-          "PCW_I2C0_I2C0_IO": {
-            "value": "EMIO"
-          },
           "PCW_I2C0_PERIPHERAL_ENABLE": {
-            "value": "1"
+            "value": "0"
           },
           "PCW_I2C0_RESET_ENABLE": {
             "value": "0"
@@ -981,6 +968,9 @@
           },
           "PCW_I2C_RESET_SELECT": {
             "value": "Share reset pin"
+          },
+          "PCW_IRQ_F2P_INTR": {
+            "value": "1"
           },
           "PCW_MIO_0_IOTYPE": {
             "value": "LVCMOS 3.3V"
@@ -1518,7 +1508,7 @@
             "value": "1"
           },
           "PCW_QSPI_PERIPHERAL_FREQMHZ": {
-            "value": "200.000000"
+            "value": "200"
           },
           "PCW_QSPI_QSPI_IO": {
             "value": "MIO 1 .. 6"
@@ -1673,6 +1663,9 @@
           "PCW_USB_RESET_ENABLE": {
             "value": "1"
           },
+          "PCW_USE_FABRIC_INTERRUPT": {
+            "value": "1"
+          },
           "PCW_USE_M_AXI_GP0": {
             "value": "0"
           },
@@ -1716,36 +1709,18 @@
           }
         },
         "components": {
-          "xlslice_0": {
+          "xlslice_3": {
             "vlnv": "xilinx.com:ip:xlslice:1.0",
             "ip_revision": "4",
             "xci_name": "bd_xlslice_0_0",
             "xci_path": "ip/bd_xlslice_0_0/bd_xlslice_0_0.xci",
-            "inst_hier_path": "Switches/xlslice_0",
+            "inst_hier_path": "Switches/xlslice_3",
             "parameters": {
               "DIN_FROM": {
                 "value": "0"
               },
               "DIN_TO": {
                 "value": "0"
-              },
-              "DIN_WIDTH": {
-                "value": "4"
-              }
-            }
-          },
-          "xlslice_1": {
-            "vlnv": "xilinx.com:ip:xlslice:1.0",
-            "ip_revision": "4",
-            "xci_name": "bd_xlslice_1_0",
-            "xci_path": "ip/bd_xlslice_1_0/bd_xlslice_1_0.xci",
-            "inst_hier_path": "Switches/xlslice_1",
-            "parameters": {
-              "DIN_FROM": {
-                "value": "1"
-              },
-              "DIN_TO": {
-                "value": "1"
               },
               "DIN_WIDTH": {
                 "value": "4"
@@ -1755,9 +1730,27 @@
           "xlslice_2": {
             "vlnv": "xilinx.com:ip:xlslice:1.0",
             "ip_revision": "4",
+            "xci_name": "bd_xlslice_1_0",
+            "xci_path": "ip/bd_xlslice_1_0/bd_xlslice_1_0.xci",
+            "inst_hier_path": "Switches/xlslice_2",
+            "parameters": {
+              "DIN_FROM": {
+                "value": "1"
+              },
+              "DIN_TO": {
+                "value": "1"
+              },
+              "DIN_WIDTH": {
+                "value": "4"
+              }
+            }
+          },
+          "xlslice_1": {
+            "vlnv": "xilinx.com:ip:xlslice:1.0",
+            "ip_revision": "4",
             "xci_name": "bd_xlslice_2_0",
             "xci_path": "ip/bd_xlslice_2_0/bd_xlslice_2_0.xci",
-            "inst_hier_path": "Switches/xlslice_2",
+            "inst_hier_path": "Switches/xlslice_1",
             "parameters": {
               "DIN_FROM": {
                 "value": "2"
@@ -1770,12 +1763,12 @@
               }
             }
           },
-          "xlslice_3": {
+          "xlslice_0": {
             "vlnv": "xilinx.com:ip:xlslice:1.0",
             "ip_revision": "4",
             "xci_name": "bd_xlslice_3_0",
             "xci_path": "ip/bd_xlslice_3_0/bd_xlslice_3_0.xci",
-            "inst_hier_path": "Switches/xlslice_3",
+            "inst_hier_path": "Switches/xlslice_0",
             "parameters": {
               "DIN_FROM": {
                 "value": "3"
@@ -1787,16 +1780,37 @@
                 "value": "4"
               }
             }
+          },
+          "NOT_gate": {
+            "vlnv": "xilinx.com:ip:util_vector_logic:2.0",
+            "ip_revision": "4",
+            "xci_name": "bd_util_vector_logic_0_0",
+            "xci_path": "ip/bd_util_vector_logic_0_0/bd_util_vector_logic_0_0.xci",
+            "inst_hier_path": "Switches/NOT_gate",
+            "parameters": {
+              "C_OPERATION": {
+                "value": "not"
+              },
+              "C_SIZE": {
+                "value": "4"
+              }
+            }
           }
         },
         "nets": {
+          "NOT_gate_Res": {
+            "ports": [
+              "NOT_gate/Res",
+              "xlslice_3/Din",
+              "xlslice_2/Din",
+              "xlslice_1/Din",
+              "xlslice_0/Din"
+            ]
+          },
           "SW_1": {
             "ports": [
               "SW",
-              "xlslice_1/Din",
-              "xlslice_2/Din",
-              "xlslice_3/Din",
-              "xlslice_0/Din"
+              "NOT_gate/Op1"
             ]
           },
           "xlslice_0_Dout": {
@@ -1838,12 +1852,6 @@
           "FIXED_IO",
           "processing_system7_0/FIXED_IO"
         ]
-      },
-      "processing_system7_0_IIC_0": {
-        "interface_ports": [
-          "I2C0",
-          "processing_system7_0/IIC_0"
-        ]
       }
     },
     "nets": {
@@ -1864,6 +1872,12 @@
         "ports": [
           "Switches/SW1",
           "RGB_LED/Green"
+        ]
+      },
+      "Net": {
+        "ports": [
+          "HDMI_INTn",
+          "hdmi_out_0/hdmi_intn"
         ]
       },
       "Pixel_clock_clk_out1": {
@@ -1888,6 +1902,12 @@
         "ports": [
           "SW",
           "Switches/SW"
+        ]
+      },
+      "Switches_SW3": {
+        "ports": [
+          "Switches/SW3",
+          "BP"
         ]
       },
       "hdmi_out_0_lcd_data": {
