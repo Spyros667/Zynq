@@ -35,7 +35,13 @@ module bd (
   HDMI_HSYNC,
   SW,
   LEDS,
-  BP
+  BP,
+  I2C0_scl_i,
+  I2C0_scl_o,
+  I2C0_scl_t,
+  I2C0_sda_i,
+  I2C0_sda_o,
+  I2C0_sda_t
 );
 
   (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR CAS_N" *)
@@ -102,6 +108,19 @@ module bd (
   output [2:0]LEDS;
   (* X_INTERFACE_IGNORE = "true" *)
   output [0:0]BP;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:iic:1.0 I2C0 SCL_I" *)
+  (* X_INTERFACE_MODE = "master I2C0" *)
+  input I2C0_scl_i;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:iic:1.0 I2C0 SCL_O" *)
+  output I2C0_scl_o;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:iic:1.0 I2C0 SCL_T" *)
+  output I2C0_scl_t;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:iic:1.0 I2C0 SDA_I" *)
+  input I2C0_sda_i;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:iic:1.0 I2C0 SDA_O" *)
+  output I2C0_sda_o;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:iic:1.0 I2C0 SDA_T" *)
+  output I2C0_sda_t;
 
   // stub module has no contents
 

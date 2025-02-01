@@ -2,7 +2,7 @@
 //Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2024.2.1 (lin64) Build 5266912 Sun Dec 15 09:03:31 MST 2024
-//Date        : Fri Jan 31 20:57:12 2025
+//Date        : Sat Feb  1 07:35:07 2025
 //Host        : Electryc running 64-bit Gentoo Linux
 //Command     : generate_target bd_wrapper.bd
 //Design      : bd_wrapper
@@ -39,6 +39,8 @@ module bd_wrapper
     HDMI_INTn,
     HDMI_PCLK,
     HDMI_VSYNC,
+    I2C0_scl_io,
+    I2C0_sda_io,
     LEDS,
     SW);
   output [0:0]BP;
@@ -69,6 +71,8 @@ module bd_wrapper
   inout HDMI_INTn;
   output HDMI_PCLK;
   output HDMI_VSYNC;
+  inout I2C0_scl_io;
+  inout I2C0_sda_io;
   output [2:0]LEDS;
   input [3:0]SW;
 
@@ -100,9 +104,27 @@ module bd_wrapper
   wire HDMI_INTn;
   wire HDMI_PCLK;
   wire HDMI_VSYNC;
+  wire I2C0_scl_i;
+  wire I2C0_scl_io;
+  wire I2C0_scl_o;
+  wire I2C0_scl_t;
+  wire I2C0_sda_i;
+  wire I2C0_sda_io;
+  wire I2C0_sda_o;
+  wire I2C0_sda_t;
   wire [2:0]LEDS;
   wire [3:0]SW;
 
+  IOBUF I2C0_scl_iobuf
+       (.I(I2C0_scl_o),
+        .IO(I2C0_scl_io),
+        .O(I2C0_scl_i),
+        .T(I2C0_scl_t));
+  IOBUF I2C0_sda_iobuf
+       (.I(I2C0_sda_o),
+        .IO(I2C0_sda_io),
+        .O(I2C0_sda_i),
+        .T(I2C0_sda_t));
   bd bd_i
        (.BP(BP),
         .DDR_addr(DDR_addr),
@@ -132,6 +154,12 @@ module bd_wrapper
         .HDMI_INTn(HDMI_INTn),
         .HDMI_PCLK(HDMI_PCLK),
         .HDMI_VSYNC(HDMI_VSYNC),
+        .I2C0_scl_i(I2C0_scl_i),
+        .I2C0_scl_o(I2C0_scl_o),
+        .I2C0_scl_t(I2C0_scl_t),
+        .I2C0_sda_i(I2C0_sda_i),
+        .I2C0_sda_o(I2C0_sda_o),
+        .I2C0_sda_t(I2C0_sda_t),
         .LEDS(LEDS),
         .SW(SW));
 endmodule
